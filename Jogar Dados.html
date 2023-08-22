@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+  crossorigin="anonymous"
+  />
+  <script
+  src="https://code.jquery.com/jquery-3.7.0.min.js"
+  integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+  crossorigin="anonymous"
+  ></script>
+
+  <title>Simulador de Dados</title>
+</head>
+<body>
+
+  <div class="container mt-5">
+   <div class="input-group mb-3">
+    <input id="dados" 
+    name="dados" 
+    type="number" 
+    class="form-control" 
+    placeholder="Quantidade de Dados"
+    aria-describedby="sp_qtd_dados">
+    <span class="input-group-text" id="sp_qtd_dados">Dados</span>
+  </div>
+
+  <div class="input-group mb-3">
+    <input id="faces" 
+    name="faces" 
+    type="number" 
+    class="form-control" 
+    placeholder="Quantidade de Faces"
+    aria-describedby="sp_qtd_faces">
+    <span class="input-group-text" id="sp_qtd_faces">Faces</span>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <button id="jogarDados" type="button" class="btn btn-warning" onclick="jogarDados()">Jogar</button>
+    </div>
+  </div>
+
+
+  <!-- <div class="row mt-5" hidden="true"> -->
+
+
+    <div class="row mt-5">
+      <div class="col-sm-6 text-center">
+
+        <table class="table table-striped table-bordered table-condensed table-hover">
+          <thead>
+            <tr>
+              <th>Dado</th>
+              <th>Resultado</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col-sm-6">
+        <h4 class="text-center">Soma dos Dados</h4>
+        <h1 id="soma" class="text-center"></h1>
+        <h4 class="text-center mt-5">Maior Resultado</h4>
+        <h1 id="maior" class="text-center"></h1>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
+<script type="text/javascript">
+
+  function jogarDados(){
+    let dados = $("#dados").val();
+    let faces = $("#faces").val();
+    let maior = 0;
+    let soma = 0;
+    let resultado;
+
+    $("tbody").text("");
+    for (let i = 1; i <= dados; i++) {
+     resultado = Math.floor(Math.random() * faces) + 1;
+     soma += resultado;
+     if (resultado > maior) {
+      maior = resultado;
+    }
+    $("tbody").append("<tr><td>" + i + "</td><td>" + resultado + "</td></tr>");
+
+  }
+
+  $("#soma").text(soma);
+  $("#maior").text(maior);
+  $(".row").attr("hidden",false);
+
+}
+
+
+</script>
+</body>
+</html>
